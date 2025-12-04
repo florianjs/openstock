@@ -1,0 +1,34 @@
+# Configuration Cloudflare Workers pour NuxtHub Self-Hosted
+# Documentation: https://hub.nuxt.com/docs/getting-started/deploy#self-hosted
+#
+# Copiez ce fichier vers wrangler.toml et remplacez les valeurs par les vôtres :
+# cp wrangler.toml.example wrangler.toml
+
+name = "openstock"
+compatibility_date = "2025-07-15"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare Pages
+pages_build_output_dir = ".output/public"
+
+# =============================================================================
+# RESOURCES CLOUDFLARE
+# =============================================================================
+
+# D1 Database - Pour stocker les données (stocks, fournisseurs, etc.)
+# Créez une base avec: npx wrangler d1 create openstock-db
+[[d1_databases]]
+binding = "DB"
+database_name = "openstock-db"
+database_id = "<YOUR_D1_DATABASE_ID>"
+
+# KV Namespace - Pour le cache et les sessions (optionnel)
+# Créez un namespace avec: npx wrangler kv:namespace create openstock_kv
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "<YOUR_KV_NAMESPACE_ID>"
+
+# R2 Bucket - Pour le stockage de fichiers (images produits, documents, etc.)
+# [[r2_buckets]]
+# binding = "BLOB"
+# bucket_name = "openstock-files"

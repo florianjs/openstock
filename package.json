@@ -7,15 +7,34 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "db:generate": "drizzle-kit generate",
+    "db:populate": "npx tsx scripts/populate-db.ts",
+    "db:populate:full": "npx tsx scripts/populate-db.ts --full",
+    "db:push": "for f in .data/hub/d1/export/*.sql; do echo \"Executing $f...\"; wrangler d1 execute zento_db --remote --file=\"$f\"; done",
+    "db:export": "npx tsx scripts/export-db.ts",
+    "db:sync": "npm run db:export && npm run db:push",
+    "deploy:cf": "nuxi build --preset=cloudflare-pages && wrangler pages deploy dist"
   },
   "dependencies": {
     "@nuxt/fonts": "^0.12.1",
     "@nuxt/icon": "^2.1.0",
+    "@nuxthub/core": "^0.9.1",
     "@nuxtjs/tailwindcss": "^6.14.0",
+    "@pinia/nuxt": "^0.11.3",
+    "chart.js": "^4.5.1",
+    "date-fns": "^4.1.0",
+    "drizzle-kit": "^0.31.7",
+    "drizzle-orm": "^0.44.7",
     "nuxt": "^4.2.1",
     "nuxt-auth-utils": "^0.5.25",
+    "pinia": "^3.0.4",
     "vue": "^3.5.25",
+    "vue-chartjs": "^5.3.3",
     "vue-router": "^4.6.3"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.77",
+    "wrangler": "^4.51.0"
   }
 }
